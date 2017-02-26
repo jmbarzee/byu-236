@@ -1,0 +1,28 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+a
+  x='a'
+
+b
+
+c
+
+Rule Evaluation
+
+c(x) :- a(x),b(y)
+
+Converged after 1 passes through the Rules.
+
+a
+  x='a'
+
+b
+
+c
+
+Query Evaluation
+
+c(z)? No
+

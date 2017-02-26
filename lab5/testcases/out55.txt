@@ -1,0 +1,44 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+bob
+  x='1'
+
+jim
+  x='2'
+
+joe
+  x='4'
+
+Rule Evaluation
+
+Dependency Graph
+
+Reverse Graph
+
+Postorder Numbers
+
+SCC Search Order
+
+Rule Evaluation Complete
+
+bob
+  x='1'
+
+jim
+  x='2'
+
+joe
+  x='4'
+
+Query Evaluation
+
+bob(x)? Yes(1)
+select
+  x='1'
+project
+  x='1'
+rename
+  x='1'
+

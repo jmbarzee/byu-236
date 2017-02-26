@@ -1,0 +1,15 @@
+Schemes:
+#this comment should be ignored
+    snap(S,N,A,P) 
+#this comment should be ignored
+    NameHasID(N,S)
+Facts:
+#this comment should be ignored
+    snap('12345','C. Brown','12 Apple','555-1234').
+    snap('67890','L. Van Pelt','34 Pear','555-5678').
+
+ 
+Queries:
+    NameHasID('Snoopy',Id)?
+#this comment should be ignored
+

@@ -1,0 +1,32 @@
+
+
+Schemes:
+  a(x)
+  b(x)
+  c(x)
+  d(x)
+  e(x)
+  f(x)
+  g(x)
+  h(x)
+  i(x)
+  j(x)
+
+Facts:
+  a('a').
+
+Rules:
+  j(x) :- i(x).
+  i(x) :- h(x).
+  h(x) :- g(x).
+  g(x) :- f(x).
+  f(x) :- e(x).
+  e(x) :- d(x).
+  d(x) :- c(x).
+  c(x) :- b(x).
+  b(x) :- a(x).
+
+Queries:
+  j('a')?
+
+

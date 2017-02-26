@@ -1,0 +1,348 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+Grades
+
+Schedule
+
+Students
+
+before
+
+cdh
+  C='CS101' D='Tu' H='10AM'
+  C='EE200' D='F' H='10AM'
+  C='EE200' D='M' H='10AM'
+  C='EE200' D='W' H='1PM'
+  C='PH100' D='Th' H='11AM'
+
+cp
+  C='CS101' Q='CS100'
+  C='CS120' Q='CS101'
+  C='CS121' Q='CS120'
+  C='CS205' Q='CS101'
+  C='CS206' Q='CS121'
+  C='CS206' Q='CS205'
+  C='EE200' Q='CS100'
+  C='EE200' Q='EE005'
+
+cr
+  C='CS101' R='Turing Aud.'
+  C='EE200' R='25 Ohm Hall'
+  C='PH100' R='Newton Lab.'
+
+csg
+  C='CS101' S='12345' G='A'
+  C='CS101' S='33333' G='A-'
+  C='CS101' S='67890' G='B'
+  C='EE200' S='12345' G='C'
+  C='EE200' S='22222' G='B+'
+  C='EE200' S='33333' G='B'
+  C='PH100' S='67890' G='C+'
+
+snap
+  S='12345' N='C. Brown' A='12 Apple St.' P='555-1234'
+  S='22222' N='P. Patty' A='56 Grape Blvd.' P='555-9999'
+  S='33333' N='Snoopy' A='12 Apple St.' P='555-1234'
+  S='67890' N='L. Van Pelt' A='34 Pear Ave.' P='555-5678'
+
+tthCourses
+
+Rule Evaluation
+
+before(C1,C2) :- cp(C2,C1)
+  C1='CS100' C2='CS101'
+  C1='CS100' C2='EE200'
+  C1='CS101' C2='CS120'
+  C1='CS101' C2='CS205'
+  C1='CS120' C2='CS121'
+  C1='CS121' C2='CS206'
+  C1='CS205' C2='CS206'
+  C1='EE005' C2='EE200'
+before(C1,C2) :- cp(C3,C1),before(C3,C2)
+  C1='CS100' C2='CS120'
+  C1='CS100' C2='CS205'
+  C1='CS101' C2='CS121'
+  C1='CS101' C2='CS206'
+  C1='CS120' C2='CS206'
+tthCourses(C) :- cdh(C,'Tu',H)
+  C='CS101'
+tthCourses(C) :- cdh(C,'Th',H)
+  C='PH100'
+Schedule(N,C,R,D,H) :- snap(S,N,A,P),csg(C,S,G),cr(C,R),cdh(C,D,H)
+  N='C. Brown' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+  N='L. Van Pelt' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='L. Van Pelt' C='PH100' R='Newton Lab.' D='Th' H='11AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+  N='Snoopy' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+Grades(N,C,G) :- snap(S,N,A,P),csg(C,S,G)
+  N='C. Brown' C='CS101' G='A'
+  N='C. Brown' C='EE200' G='C'
+  N='L. Van Pelt' C='CS101' G='B'
+  N='L. Van Pelt' C='PH100' G='C+'
+  N='P. Patty' C='EE200' G='B+'
+  N='Snoopy' C='CS101' G='A-'
+  N='Snoopy' C='EE200' G='B'
+Students(C,R,N,G) :- snap(S,N,A,P),csg(C,S,G),cr(C,R)
+  C='CS101' R='Turing Aud.' N='C. Brown' G='A'
+  C='CS101' R='Turing Aud.' N='L. Van Pelt' G='B'
+  C='CS101' R='Turing Aud.' N='Snoopy' G='A-'
+  C='EE200' R='25 Ohm Hall' N='C. Brown' G='C'
+  C='EE200' R='25 Ohm Hall' N='P. Patty' G='B+'
+  C='EE200' R='25 Ohm Hall' N='Snoopy' G='B'
+  C='PH100' R='Newton Lab.' N='L. Van Pelt' G='C+'
+before(C1,C2) :- cp(C2,C1)
+before(C1,C2) :- cp(C3,C1),before(C3,C2)
+  C1='CS100' C2='CS121'
+  C1='CS100' C2='CS206'
+tthCourses(C) :- cdh(C,'Tu',H)
+tthCourses(C) :- cdh(C,'Th',H)
+Schedule(N,C,R,D,H) :- snap(S,N,A,P),csg(C,S,G),cr(C,R),cdh(C,D,H)
+Grades(N,C,G) :- snap(S,N,A,P),csg(C,S,G)
+Students(C,R,N,G) :- snap(S,N,A,P),csg(C,S,G),cr(C,R)
+before(C1,C2) :- cp(C2,C1)
+before(C1,C2) :- cp(C3,C1),before(C3,C2)
+tthCourses(C) :- cdh(C,'Tu',H)
+tthCourses(C) :- cdh(C,'Th',H)
+Schedule(N,C,R,D,H) :- snap(S,N,A,P),csg(C,S,G),cr(C,R),cdh(C,D,H)
+Grades(N,C,G) :- snap(S,N,A,P),csg(C,S,G)
+Students(C,R,N,G) :- snap(S,N,A,P),csg(C,S,G),cr(C,R)
+
+Converged after 3 passes through the Rules.
+
+Grades
+  N='C. Brown' C='CS101' G='A'
+  N='C. Brown' C='EE200' G='C'
+  N='L. Van Pelt' C='CS101' G='B'
+  N='L. Van Pelt' C='PH100' G='C+'
+  N='P. Patty' C='EE200' G='B+'
+  N='Snoopy' C='CS101' G='A-'
+  N='Snoopy' C='EE200' G='B'
+
+Schedule
+  N='C. Brown' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='C. Brown' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+  N='L. Van Pelt' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='L. Van Pelt' C='PH100' R='Newton Lab.' D='Th' H='11AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='P. Patty' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+  N='Snoopy' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+
+Students
+  C='CS101' R='Turing Aud.' N='C. Brown' G='A'
+  C='CS101' R='Turing Aud.' N='L. Van Pelt' G='B'
+  C='CS101' R='Turing Aud.' N='Snoopy' G='A-'
+  C='EE200' R='25 Ohm Hall' N='C. Brown' G='C'
+  C='EE200' R='25 Ohm Hall' N='P. Patty' G='B+'
+  C='EE200' R='25 Ohm Hall' N='Snoopy' G='B'
+  C='PH100' R='Newton Lab.' N='L. Van Pelt' G='C+'
+
+before
+  C1='CS100' C2='CS101'
+  C1='CS100' C2='CS120'
+  C1='CS100' C2='CS121'
+  C1='CS100' C2='CS205'
+  C1='CS100' C2='CS206'
+  C1='CS100' C2='EE200'
+  C1='CS101' C2='CS120'
+  C1='CS101' C2='CS121'
+  C1='CS101' C2='CS205'
+  C1='CS101' C2='CS206'
+  C1='CS120' C2='CS121'
+  C1='CS120' C2='CS206'
+  C1='CS121' C2='CS206'
+  C1='CS205' C2='CS206'
+  C1='EE005' C2='EE200'
+
+cdh
+  C='CS101' D='Tu' H='10AM'
+  C='EE200' D='F' H='10AM'
+  C='EE200' D='M' H='10AM'
+  C='EE200' D='W' H='1PM'
+  C='PH100' D='Th' H='11AM'
+
+cp
+  C='CS101' Q='CS100'
+  C='CS120' Q='CS101'
+  C='CS121' Q='CS120'
+  C='CS205' Q='CS101'
+  C='CS206' Q='CS121'
+  C='CS206' Q='CS205'
+  C='EE200' Q='CS100'
+  C='EE200' Q='EE005'
+
+cr
+  C='CS101' R='Turing Aud.'
+  C='EE200' R='25 Ohm Hall'
+  C='PH100' R='Newton Lab.'
+
+csg
+  C='CS101' S='12345' G='A'
+  C='CS101' S='33333' G='A-'
+  C='CS101' S='67890' G='B'
+  C='EE200' S='12345' G='C'
+  C='EE200' S='22222' G='B+'
+  C='EE200' S='33333' G='B'
+  C='PH100' S='67890' G='C+'
+
+snap
+  S='12345' N='C. Brown' A='12 Apple St.' P='555-1234'
+  S='22222' N='P. Patty' A='56 Grape Blvd.' P='555-9999'
+  S='33333' N='Snoopy' A='12 Apple St.' P='555-1234'
+  S='67890' N='L. Van Pelt' A='34 Pear Ave.' P='555-5678'
+
+tthCourses
+  C='CS101'
+  C='PH100'
+
+Query Evaluation
+
+snap(Id,'Snoopy',A,P)? Yes(1)
+select
+  S='33333' N='Snoopy' A='12 Apple St.' P='555-1234'
+project
+  S='33333' A='12 Apple St.' P='555-1234'
+rename
+  Id='33333' A='12 Apple St.' P='555-1234'
+
+csg(Course,'33333',Grade)? Yes(2)
+select
+  C='CS101' S='33333' G='A-'
+  C='EE200' S='33333' G='B'
+project
+  C='CS101' G='A-'
+  C='EE200' G='B'
+rename
+  Course='CS101' Grade='A-'
+  Course='EE200' Grade='B'
+
+cp(Course,'CS100')? Yes(2)
+select
+  C='CS101' Q='CS100'
+  C='EE200' Q='CS100'
+project
+  C='CS101'
+  C='EE200'
+rename
+  Course='CS101'
+  Course='EE200'
+
+cdh('EE200',Day,Hour)? Yes(3)
+select
+  C='EE200' D='F' H='10AM'
+  C='EE200' D='M' H='10AM'
+  C='EE200' D='W' H='1PM'
+project
+  D='F' H='10AM'
+  D='M' H='10AM'
+  D='W' H='1PM'
+rename
+  Day='F' Hour='10AM'
+  Day='M' Hour='10AM'
+  Day='W' Hour='1PM'
+
+cr('CS101',Room)? Yes(1)
+select
+  C='CS101' R='Turing Aud.'
+project
+  R='Turing Aud.'
+rename
+  Room='Turing Aud.'
+
+tthCourses(C)? Yes(2)
+select
+  C='CS101'
+  C='PH100'
+project
+  C='CS101'
+  C='PH100'
+rename
+  C='CS101'
+  C='PH100'
+
+before('CS100','CS206')? Yes(1)
+select
+  C1='CS100' C2='CS206'
+project
+rename
+
+before('CS100',prerequisiteTo)? Yes(6)
+select
+  C1='CS100' C2='CS101'
+  C1='CS100' C2='CS120'
+  C1='CS100' C2='CS121'
+  C1='CS100' C2='CS205'
+  C1='CS100' C2='CS206'
+  C1='CS100' C2='EE200'
+project
+  C2='CS101'
+  C2='CS120'
+  C2='CS121'
+  C2='CS205'
+  C2='CS206'
+  C2='EE200'
+rename
+  prerequisiteTo='CS101'
+  prerequisiteTo='CS120'
+  prerequisiteTo='CS121'
+  prerequisiteTo='CS205'
+  prerequisiteTo='CS206'
+  prerequisiteTo='EE200'
+
+Schedule('Snoopy',C,R,D,H)? Yes(4)
+select
+  N='Snoopy' C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  N='Snoopy' C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+project
+  C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+rename
+  C='CS101' R='Turing Aud.' D='Tu' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='F' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='M' H='10AM'
+  C='EE200' R='25 Ohm Hall' D='W' H='1PM'
+
+Grades('Snoopy',C,G)? Yes(2)
+select
+  N='Snoopy' C='CS101' G='A-'
+  N='Snoopy' C='EE200' G='B'
+project
+  C='CS101' G='A-'
+  C='EE200' G='B'
+rename
+  C='CS101' G='A-'
+  C='EE200' G='B'
+
+Students('CS101',R,N,G)? Yes(3)
+select
+  C='CS101' R='Turing Aud.' N='C. Brown' G='A'
+  C='CS101' R='Turing Aud.' N='L. Van Pelt' G='B'
+  C='CS101' R='Turing Aud.' N='Snoopy' G='A-'
+project
+  R='Turing Aud.' N='C. Brown' G='A'
+  R='Turing Aud.' N='L. Van Pelt' G='B'
+  R='Turing Aud.' N='Snoopy' G='A-'
+rename
+  R='Turing Aud.' N='C. Brown' G='A'
+  R='Turing Aud.' N='L. Van Pelt' G='B'
+  R='Turing Aud.' N='Snoopy' G='A-'
+

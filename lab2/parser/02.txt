@@ -1,0 +1,10 @@
+Schemes:
+  snap(S,N,A,P)
+  HasSameAddress(X,Y)
+
+Facts:
+
+Rules:
+
+Queries:
+  HasSameAddress('Snoopy',Who)?

@@ -1,0 +1,17 @@
+
+
+Schemes:
+  a(x)
+  b(y)
+  c(z)
+
+Facts:
+  a('a').
+
+Rules:
+  c(x) :- a(x), b(y).
+
+Queries:
+  c(z)?
+
+

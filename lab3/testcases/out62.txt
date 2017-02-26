@@ -1,0 +1,117 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+Grades
+
+Schedule
+
+Students
+
+before
+
+cdh
+  C='CS101' D='Tu' H='10AM'
+  C='EE200' D='F' H='10AM'
+  C='EE200' D='M' H='10AM'
+  C='EE200' D='W' H='1PM'
+  C='PH100' D='Th' H='11AM'
+
+cp
+  C='CS101' Q='CS100'
+  C='CS120' Q='CS101'
+  C='CS121' Q='CS120'
+  C='CS205' Q='CS101'
+  C='CS206' Q='CS121'
+  C='CS206' Q='CS205'
+  C='EE200' Q='CS100'
+  C='EE200' Q='EE005'
+
+cr
+  C='CS101' R='Turing Aud.'
+  C='EE200' R='25 Ohm Hall'
+  C='PH100' R='Newton Lab.'
+
+csg
+  C='CS101' S='12345' G='A'
+  C='CS101' S='33333' G='A-'
+  C='CS101' S='67890' G='B'
+  C='EE200' S='12345' G='C'
+  C='EE200' S='22222' G='B+'
+  C='EE200' S='33333' G='B'
+  C='PH100' S='67890' G='C+'
+
+snap
+  S='12345' N='C. Brown' A='12 Apple St.' P='555-1234'
+  S='22222' N='P. Patty' A='56 Grape Blvd.' P='555-9999'
+  S='33333' N='Snoopy' A='12 Apple St.' P='555-1234'
+  S='67890' N='L. Van Pelt' A='34 Pear Ave.' P='555-5678'
+
+tthCourses
+
+Query Evaluation
+
+snap(Id,'Snoopy',A,P)? Yes(1)
+select
+  S='33333' N='Snoopy' A='12 Apple St.' P='555-1234'
+project
+  S='33333' A='12 Apple St.' P='555-1234'
+rename
+  Id='33333' A='12 Apple St.' P='555-1234'
+
+csg(Course,'33333',Grade)? Yes(2)
+select
+  C='CS101' S='33333' G='A-'
+  C='EE200' S='33333' G='B'
+project
+  C='CS101' G='A-'
+  C='EE200' G='B'
+rename
+  Course='CS101' Grade='A-'
+  Course='EE200' Grade='B'
+
+cp(Course,'CS100')? Yes(2)
+select
+  C='CS101' Q='CS100'
+  C='EE200' Q='CS100'
+project
+  C='CS101'
+  C='EE200'
+rename
+  Course='CS101'
+  Course='EE200'
+
+cdh('EE200',Day,Hour)? Yes(3)
+select
+  C='EE200' D='F' H='10AM'
+  C='EE200' D='M' H='10AM'
+  C='EE200' D='W' H='1PM'
+project
+  D='F' H='10AM'
+  D='M' H='10AM'
+  D='W' H='1PM'
+rename
+  Day='F' Hour='10AM'
+  Day='M' Hour='10AM'
+  Day='W' Hour='1PM'
+
+cr('CS101',Room)? Yes(1)
+select
+  C='CS101' R='Turing Aud.'
+project
+  R='Turing Aud.'
+rename
+  Room='Turing Aud.'
+
+tthCourses(C)? No
+
+before('CS100','CS206')? No
+
+before('CS100',prerequisiteTo)? No
+
+Schedule('Snoopy',C,R,D,H)? No
+
+Grades('Snoopy',C,G)? No
+
+Students('CS101',R,N,G)? No
+

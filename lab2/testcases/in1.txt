@@ -1,0 +1,7 @@
+Schemes:
+	student('name')
+Facts:
+Rules:
+Queries:
+
+Facts:

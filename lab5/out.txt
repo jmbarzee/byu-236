@@ -1,0 +1,52 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+Ancestor
+
+Parent
+  p='bob' c='ned' 
+  p='jim' c='bob' 
+
+Sibling
+  a='sue' b='ned' 
+
+Rule Evaluation
+
+Dependency Graph
+  R0: R0
+  R1: R1 R2
+  R2:
+
+Reverse Graph
+  R0: R0
+  R1: R1
+  R2: R1
+
+Postorder Numbers
+  R0: 1
+  R1: 2
+  R2: 3
+SCC Search Order
+  0
+  2
+  1
+  2
+
+
+
+Ancestor
+
+Parent
+  p='bob' c='ned' 
+  p='jim' c='bob' 
+
+Sibling
+  a='sue' b='ned' 
+
+Query Evaluation
+
+Ancestor(x,'ned')? No
+
+Sibling('ned','sue')? No
+

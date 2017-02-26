@@ -1,0 +1,18 @@
+
+
+Schemes:
+  a(x)
+  b(y)
+  c(x,y)
+
+Facts:
+  a('a').
+  b('b').
+
+Rules:
+  c(x,y) :- a(x), b(y).
+
+Queries:
+  c(x,y)?
+
+

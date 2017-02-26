@@ -1,0 +1,39 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+a
+  x='a'
+
+b
+  y='b'
+
+c
+
+Rule Evaluation
+
+c(x,y) :- a(x),b(y)
+  x='a' y='b'
+c(x,y) :- a(x),b(y)
+
+Converged after 2 passes through the Rules.
+
+a
+  x='a'
+
+b
+  y='b'
+
+c
+  x='a' y='b'
+
+Query Evaluation
+
+c(x,y)? Yes(1)
+select
+  x='a' y='b'
+project
+  x='a' y='b'
+rename
+  x='a' y='b'
+
